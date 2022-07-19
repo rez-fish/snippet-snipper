@@ -13,8 +13,6 @@ const Login = () => {
   const { signUp, user, logIn, githubLogin, googleLogin, error } = UserAuth()
   const router = useRouter()
 
-  console.log(user)
-
   useEffect(() => {
     if (user?.uid) {
       router.push('/')

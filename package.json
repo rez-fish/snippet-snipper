@@ -12,9 +12,11 @@
     "daisyui": "^2.19.0",
     "firebase": "^9.9.0",
     "next": "12.2.2",
+    "next-themes": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "theme-change": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

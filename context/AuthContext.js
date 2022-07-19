@@ -11,6 +11,7 @@ import {
 import { createContext, useContext, useEffect, useState } from 'react'
 import { auth, db } from '../firebase'
 import { doc, setDoc } from 'firebase/firestore'
+import { useRouter } from 'next/router'
 
 const AuthContext = createContext()
 const githubProvider = new GithubAuthProvider()
@@ -19,17 +20,21 @@ const googleProvider = new GoogleAuthProvider()
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [error, setError] = useState('')
+  const [loggedIn, setLoggedIn] = useState(false)
+  const route = useRouter()
 
   const signUp = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password).then((res) => {
       setDoc(doc(db, 'users', res.user.uid), {})
     })
+    setLoggedIn(true)
   }
 
   const logIn = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         setUser(res.user)
+        setLoggedIn(true)
       })
       .catch((error) => {
         setError(error)
@@ -38,9 +43,9 @@ export const AuthContextProvider = ({ children }) => {
 
   const logout = () => {
     try {
+      route.push('/')
       signOut(auth)
-      console.log(user + 'before')
-      console.log('Signed Out')
+      setLoggedIn(false)
     } catch (error) {
       console.log(error.message)
     }
@@ -49,8 +54,9 @@ export const AuthContextProvider = ({ children }) => {
   const githubLogin = () => {
     signInWithPopup(auth, githubProvider)
       .then((res) => {
-        setDoc(doc(db, 'users', res.user.uid), {})
+        // setDoc(doc(db, 'users', res.user.uid), {})
         setUser(res.user)
+        setLoggedIn(true)
       })
       .catch((error) => {
         console.log(error.message)
@@ -61,7 +67,8 @@ export const AuthContextProvider = ({ children }) => {
     signInWithPopup(auth, googleProvider)
       .then((res) => {
         setUser(res.user)
-        setDoc(doc(db, 'users', res.user.uid), {})
+        // setDoc(doc(db, 'users', res.user.uid), {})
+        setLoggedIn(true)
       })
       .catch((error) => {
         console.log(error.message)
@@ -86,6 +93,8 @@ export const AuthContextProvider = ({ children }) => {
         githubLogin,
         GithubAuthProvider,
         googleLogin,
+        loggedIn,
+        setLoggedIn,
       }}
     >
       {children}

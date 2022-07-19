@@ -1,14 +1,23 @@
 import Layout from '../components/Layout'
 import { AuthContextProvider } from '../context/AuthContext'
+import { ThemeProvider } from 'next-themes'
 import '../styles/globals.css'
+import { useEffect } from 'react'
+import { themeChange } from 'theme-change'
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    themeChange(false)
+  })
+
   return (
-    <Layout>
+    <ThemeProvider themes={'retro'}>
       <AuthContextProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </AuthContextProvider>
-    </Layout>
+    </ThemeProvider>
   )
 }
 
