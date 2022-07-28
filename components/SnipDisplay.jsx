@@ -62,7 +62,7 @@ const SnipDisplay = ({ snips }) => {
           <option value='css'>CSS</option>
           <option value='tailwind'>Tailwind</option>
         </select>
-        <div className='flex gap-4 mx-auto'>
+        <div className='flex gap-4 mx-auto flex-wrap'>
           <button className='btn btn-wide flex-1' onClick={() => applyFilter()}>
             Apply Filter
           </button>

@@ -10,7 +10,7 @@ const Snips = () => {
   const router = useRouter()
   const [title, setTitle] = useState('')
   const [code, setCode] = useState('')
-  const [tag, setTag] = useState('')
+  const [tag, setTag] = useState('javascript')
   const [description, setDescription] = useState('')
   const [err, setErr] = useState(false)
 
@@ -89,7 +89,7 @@ const Snips = () => {
             className='select select-bordered'
             onChange={(e) => setTag(e.target.value)}
           >
-            <option disabled defaultValue>
+            <option defaultValue disabled>
               Pick category
             </option>
             <option value='javascript'>JavaScript</option>
