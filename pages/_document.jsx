@@ -6,6 +6,10 @@ export default function Document() {
   return (
     <Html>
       <Head />
+      <link
+        rel='stylesheet'
+        href='https://highlightjs.org/static/demo/styles/railscasts.css'
+      />
       <body>
         <Main />
         <NextScript />

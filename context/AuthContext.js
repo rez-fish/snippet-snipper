@@ -10,7 +10,15 @@ import {
 } from 'firebase/auth'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { auth, db } from '../firebase'
-import { doc, setDoc } from 'firebase/firestore'
+import {
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  deleteField,
+  arrayRemove,
+  arrayUnion,
+} from 'firebase/firestore'
 import { useRouter } from 'next/router'
 
 const AuthContext = createContext()
@@ -21,6 +29,8 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [error, setError] = useState('')
   const [loggedIn, setLoggedIn] = useState(false)
+  const [snips, setSnips] = useState(null)
+  const [deletedSnip, setDeletedSnip] = useState({ id: 0 })
   const route = useRouter()
 
   const signUp = (email, password) => {
@@ -75,6 +85,28 @@ export const AuthContextProvider = ({ children }) => {
       })
   }
 
+  const updateSnips = (s) => {
+    setSnips(s)
+  }
+
+  const deleteSnip = async (id, title, code, tag, description) => {
+    const pathToDelete = doc(db, 'users', user?.uid)
+    try {
+      await updateDoc(pathToDelete, {
+        snips: arrayRemove({
+          id,
+          title,
+          code,
+          tag,
+          description,
+        }),
+      })
+      setDeletedSnip({ id })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   useEffect(() => {
     const checkUser = onAuthStateChanged(auth, async (user) => {
       setUser(user)
@@ -95,6 +127,10 @@ export const AuthContextProvider = ({ children }) => {
         googleLogin,
         loggedIn,
         setLoggedIn,
+        updateSnips,
+        snips,
+        deleteSnip,
+        deletedSnip,
       }}
     >
       {children}

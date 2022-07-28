@@ -51,7 +51,7 @@ const ThemeChanger = () => {
     }
     setTheme(theme)
     console.log(theme)
-    updateDoc(doc(db, 'users', user?.uid), { theme: theme })
+    updateDoc(doc(db, 'users', user?.uid), { theme: theme }, { merge: true })
   }, [theme, setTheme, user, route])
 
   const handleThemeChange = (e) => {
@@ -61,8 +61,9 @@ const ThemeChanger = () => {
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
   return (
-    <div className='form-control'>
-      <div className='input-group'>
+    <div className='form-control m-10'>
+      <div className='input-group flex items-center'>
+        <p className='text-2xl font-bold'>Change Theme: </p>
         <select
           className='select select-bordered'
           onChange={(e) => handleThemeChange(e)}
@@ -76,8 +77,6 @@ const ThemeChanger = () => {
             </option>
           ))}
         </select>
-        <p className='text-xl'>Select Theme . Current {theme}</p>
-        <p className='text-xl'>Select Theme . Current {themeState}</p>
       </div>
     </div>
   )

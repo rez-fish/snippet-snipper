@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className='navbar bg-base-200 p-2'>
         <div className='flex-1'>
           <Link href={'/'}>
-            <a className='btn btn-ghost normal-case text-xl'>
+            <a className='btn btn-ghost normal-case text-xl text-primary'>
               snippet
               <TiScissorsOutline />
               snipper
@@ -41,7 +41,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex='0'
-              className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'
+              className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary rounded-box w-52 text-primary-content'
             >
               <li>
                 <Link href={`/profile/${user?.uid}`}>
