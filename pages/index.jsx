@@ -12,10 +12,8 @@ import SnipDisplay from '../components/SnipDisplay'
 export default function Home() {
   const router = useRouter()
   const { user, logout, updateSnips, snips } = UserAuth()
-  console.log(user)
 
   const { theme, setTheme } = useTheme()
-  console.log(theme)
 
   useEffect(() => {
     const getUserDoc = async () => {
@@ -23,7 +21,6 @@ export default function Home() {
         const docRef = doc(db, 'users', user?.uid)
         // const docSnap = await getDoc(docRef)
         const docSnap = onSnapshot(docRef, (doc) => {
-          console.log('Current Data: ', doc.data())
           setTheme(doc.data().theme)
           updateSnips(doc.data().snips)
         })
