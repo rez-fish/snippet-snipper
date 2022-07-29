@@ -35,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const signUp = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password).then((res) => {
-      setDoc(doc(db, 'users', res.user.uid), {})
+      setDoc(doc(db, 'users', res.user.uid), { theme: 'light', snips: [] })
     })
     setLoggedIn(true)
   }
@@ -61,29 +61,29 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
 
-  const githubLogin = () => {
-    signInWithPopup(auth, githubProvider)
-      .then((res) => {
-        // setDoc(doc(db, 'users', res.user.uid), {})
-        setUser(res.user)
-        setLoggedIn(true)
-      })
-      .catch((error) => {
-        console.log(error.message)
-      })
-  }
+  // const githubLogin = () => {
+  //   signInWithPopup(auth, githubProvider)
+  //     .then((res) => {
+  //       // setDoc(doc(db, 'users', res.user.uid), {})
+  //       setUser(res.user)
+  //       setLoggedIn(true)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message)
+  //     })
+  // }
 
-  const googleLogin = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((res) => {
-        setUser(res.user)
-        // setDoc(doc(db, 'users', res.user.uid), {})
-        setLoggedIn(true)
-      })
-      .catch((error) => {
-        console.log(error.message)
-      })
-  }
+  // const googleLogin = () => {
+  //   signInWithPopup(auth, googleProvider)
+  //     .then((res) => {
+  //       setUser(res.user)
+  //       // setDoc(doc(db, 'users', res.user.uid), {})
+  //       setLoggedIn(true)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message)
+  //     })
+  // }
 
   const updateSnips = (s) => {
     setSnips(s)
@@ -122,9 +122,9 @@ export const AuthContextProvider = ({ children }) => {
         error,
         logIn,
         logout,
-        githubLogin,
-        GithubAuthProvider,
-        googleLogin,
+        // githubLogin,
+        // GithubAuthProvider,
+        // googleLogin,
         loggedIn,
         setLoggedIn,
         updateSnips,

@@ -19,19 +19,10 @@ export default function Home() {
     const getUserDoc = async () => {
       if (user?.uid) {
         const docRef = doc(db, 'users', user?.uid)
-        // const docSnap = await getDoc(docRef)
         const docSnap = onSnapshot(docRef, (doc) => {
           setTheme(doc.data().theme)
           updateSnips(doc.data().snips)
         })
-
-        // if (docSnap.exists()) {
-        //   setTheme(docSnap.data().theme)
-        //   updateSnips(docSnap.data().snips)
-        // } else {
-        // doc.data() will be undefined in this case
-        //   console.log('No such document!')
-        // }
       }
     }
     getUserDoc()

@@ -19,13 +19,6 @@ const Login = () => {
     }
   })
 
-  const handleGithubLogin = () => {
-    githubLogin()
-  }
-  const handleGoogleLogin = () => {
-    googleLogin()
-  }
-
   const handleLogin = async (e) => {
     e.preventDefault()
     if (loggingIn) {
@@ -88,70 +81,56 @@ const Login = () => {
                   Login
                 </span>
               </p>
-              {/* <p>{error?.code && error}</p> */}
             </div>
           )}
         </div>
         <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
           <div className='card-body'>
-            <div className='form-control'>
-              <label className='label'>
-                <span className='label-text'>Email</span>
-              </label>
-              <input
-                type='text'
-                placeholder='email'
-                className='input input-bordered'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className='form-control'>
-              <label className='label'>
-                <span className='label-text'>Password</span>
-              </label>
-              <input
-                type='password'
-                placeholder='password'
-                className='input input-bordered'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className='flex gap-2 text-4xl mt-4 md:text-5xl'>
-              <div className=''>
-                <button className='' onClick={() => handleGoogleLogin()}>
-                  <FcGoogle />
-                </button>
+            <form action='submit'>
+              <div className='form-control'>
+                <label className='label'>
+                  <span className='label-text'>Email</span>
+                </label>
+                <input
+                  type='text'
+                  placeholder='email'
+                  className='input input-bordered'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
-              <div className=''>
-                <button
-                  className='text-primary'
-                  onClick={() => handleGithubLogin()}
-                >
-                  <FiGithub />
-                </button>
+              <div className='form-control'>
+                <label className='label'>
+                  <span className='label-text'>Password</span>
+                </label>
+                <input
+                  type='password'
+                  placeholder='password'
+                  className='input input-bordered'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
-            </div>
-            <div className='form-control mt-4'>
-              {loggingIn && (
-                <button
-                  className='btn btn-primary'
-                  onClick={(e) => handleLogin(e)}
-                >
-                  Login
-                </button>
-              )}
-              {!loggingIn && (
-                <button
-                  className='btn btn-primary'
-                  onClick={(e) => handleLogin(e)}
-                >
-                  Register
-                </button>
-              )}
-              <p>{user?.email}</p>
-            </div>
+              <div className='form-control mt-4'>
+                {loggingIn && (
+                  <button
+                    className='btn btn-primary'
+                    onClick={(e) => handleLogin(e)}
+                  >
+                    Login
+                  </button>
+                )}
+                {!loggingIn && (
+                  <button
+                    type='submit'
+                    className='btn btn-primary'
+                    onClick={(e) => handleLogin(e)}
+                  >
+                    Register
+                  </button>
+                )}
+              </div>
+            </form>
           </div>
         </div>
       </div>
